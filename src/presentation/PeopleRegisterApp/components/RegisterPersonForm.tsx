@@ -2,9 +2,22 @@
 import { useState } from 'react';
 import { useForm } from '../hooks/useForm';
 import { RegisterForm } from '../types/register-form';
+import { MessageModal } from './MessageModal';
 
+
+const defaultMessageModalSettings = {
+    show: false,
+    content: "",
+    title: "",
+    button: {
+        text: "",
+        style: ""
+    }
+};
 export const RegisterPersonForm = () => {
     const [formSubmitted, setFormSubmitted] = useState(false);
+
+    const [messageModal, setMessageModal] = useState(defaultMessageModalSettings);
 
     const initialForm: RegisterForm = {
         companyName: '',
@@ -49,57 +62,80 @@ export const RegisterPersonForm = () => {
         e.preventDefault();
         setFormSubmitted(true);
         if (!isFormValid) return;
+
+        setMessageModal({
+            title: "Datos guardados correctamente",
+            show: true,
+            content: JSON.stringify({ companyName, contactName }),
+            button: {
+                text: "Aceptar",
+                style: "primary"
+            }
+        })
+    }
+
+    const handleCloseMessageModal = () => {
+        setMessageModal(defaultMessageModalSettings);
     }
 
     return (
-        <form className="form" onSubmit={handleFormSubmit} noValidate>
-            <div className="mb-4">
-                <input
-                    type="text"
-                    name="companyName"
-                    className={`form-control ${formSubmitted && companyNameValid ? 'is-invalid' : ''}`}
-                    placeholder="Nombre de la compañía"
-                    value={companyName}
-                    onChange={onInputChange}
-                />
-                <div className='invalid-feedback'>{companyNameValid}</div>
-            </div>
-            <div className="mb-4">
-                <input
-                    type="text"
-                    name="contactName"
-                    className={`form-control ${formSubmitted && contactNameValid ? 'is-invalid' : ""}`}
-                    placeholder="Nombre de la persona de contacto"
-                    value={contactName}
-                    onChange={onInputChange} />
-                <div className='invalid-feedback'>{contactNameValid}</div>
-            </div>
-            <div className="mb-4">
-                <input
-                    type="email"
-                    name="email"
-                    className={`form-control ${formSubmitted && emailValid ? 'is-invalid' : ""}`}
-                    placeholder="Correo electrónico"
-                    value={email}
-                    onChange={onInputChange} />
-                <div className='invalid-feedback'>{emailValid}</div>
-            </div>
-            <div className="mb-4">
-                <input
-                    type="tel"
-                    name="phone"
-                    className={`form-control ${formSubmitted && phoneValid ? 'is-invalid' : ""}`}
-                    placeholder="Teléfono"
-                    value={phone}
-                    onChange={onInputChange} />
-                <div className='invalid-feedback'>{phoneValid}</div>
-            </div>
-            <div className="d-grid gap-2 col-12 mx-auto">
-                <button
-                    type="submit"
-                    className={`btn btn-primary px-5 ${formSubmitted && !isFormValid ? 'disabled' : ''}`}
-                >Guardar</button>
-            </div>
-        </form>
+        <>
+            <MessageModal
+                show={messageModal.show}
+                handleClose={handleCloseMessageModal}
+                content={messageModal.content}
+                title={messageModal.title} />
+
+            <form className="form" onSubmit={handleFormSubmit} noValidate>
+                <div className="mb-4">
+                    <input
+                        type="text"
+                        name="companyName"
+                        className={`form-control ${formSubmitted && companyNameValid ? 'is-invalid' : ''}`}
+                        placeholder="Nombre de la compañía"
+                        value={companyName}
+                        onChange={onInputChange}
+                    />
+                    <div className='invalid-feedback'>{companyNameValid}</div>
+                </div>
+                <div className="mb-4">
+                    <input
+                        type="text"
+                        name="contactName"
+                        className={`form-control ${formSubmitted && contactNameValid ? 'is-invalid' : ""}`}
+                        placeholder="Nombre de la persona de contacto"
+                        value={contactName}
+                        onChange={onInputChange} />
+                    <div className='invalid-feedback'>{contactNameValid}</div>
+                </div>
+                <div className="mb-4">
+                    <input
+                        type="email"
+                        name="email"
+                        className={`form-control ${formSubmitted && emailValid ? 'is-invalid' : ""}`}
+                        placeholder="Correo electrónico"
+                        value={email}
+                        onChange={onInputChange} />
+                    <div className='invalid-feedback'>{emailValid}</div>
+                </div>
+                <div className="mb-4">
+                    <input
+                        type="tel"
+                        name="phone"
+                        className={`form-control ${formSubmitted && phoneValid ? 'is-invalid' : ""}`}
+                        placeholder="Teléfono"
+                        value={phone}
+                        onChange={onInputChange} />
+                    <div className='invalid-feedback'>{phoneValid}</div>
+                </div>
+                <div className="d-grid gap-2 col-12 mx-auto">
+                    <button
+                        type="submit"
+                        className={`btn btn-primary px-5 ${formSubmitted && !isFormValid ? 'disabled' : ''}`}
+                    >Guardar</button>
+                </div>
+            </form>
+        </>
+
     )
 }
