@@ -1,9 +1,7 @@
 
 import { useState } from 'react';
-import image from '../../../assets/images/weeclaims.png';
 import { useForm } from '../hooks/useForm';
 import { RegisterForm } from '../types/register-form';
-import { PeopleList } from './PeopleList';
 
 export const RegisterPersonForm = () => {
     const [formSubmitted, setFormSubmitted] = useState(false);
@@ -54,65 +52,54 @@ export const RegisterPersonForm = () => {
     }
 
     return (
-        <>
-            <div className='d-flex flex-column flex-xl-row flex-lg-row justify-content-center align-items-center align-items-xl-stretch align-items-lg-stretch mt-3'>
-                <div className="col-12 col-xl-6 col-lg-4 col-md-6 col-sm-8 d-flex flex-column justify-content-center bg-light rounded me-xl-3">
-                    <img src={image} alt="WeeClaims logo" className='img-fluid p-3 mb-3' />
-                </div>
-                <div className="col-12 col-xl-6 col-lg-4 col-md-6 col-sm-8">
-                    <h1 className='h3 text-primary'>Registro persona</h1>
-                    <form className="form" onSubmit={handleFormSubmit} noValidate>
-                        <div className="mb-4">
-                            <input
-                                type="text"
-                                name="companyName"
-                                className={`form-control ${formSubmitted && companyNameValid ? 'is-invalid' : ''}`}
-                                placeholder="Nombre de la compañía"
-                                value={companyName}
-                                onChange={onInputChange}
-                            />
-                            <div className='invalid-feedback'>{companyNameValid}</div>
-                        </div>
-                        <div className="mb-4">
-                            <input
-                                type="text"
-                                name="contactName"
-                                className={`form-control ${formSubmitted && contactNameValid ? 'is-invalid' : ""}`}
-                                placeholder="Nombre de la persona de contacto"
-                                value={contactName}
-                                onChange={onInputChange} />
-                            <div className='invalid-feedback'>{contactNameValid}</div>
-                        </div>
-                        <div className="mb-4">
-                            <input
-                                type="email"
-                                name="email"
-                                className={`form-control ${formSubmitted && emailValid ? 'is-invalid' : ""}`}
-                                placeholder="Correo electrónico"
-                                value={email}
-                                onChange={onInputChange} />
-                            <div className='invalid-feedback'>{emailValid}</div>
-                        </div>
-                        <div className="mb-4">
-                            <input
-                                type="tel"
-                                name="phone"
-                                className={`form-control ${formSubmitted && phoneValid ? 'is-invalid' : ""}`}
-                                placeholder="Teléfono"
-                                value={phone}
-                                onChange={onInputChange} />
-                            <div className='invalid-feedback'>{phoneValid}</div>
-                        </div>
-                        <div className="d-grid gap-2">
-                            <button
-                                type="submit"
-                                className={`btn btn-primary px-5 ${formSubmitted && !isFormValid ? 'disabled' : ''}`}
-                            >Guardar</button>
-                        </div>
-                    </form>
-                </div>
+        <form className="form" onSubmit={handleFormSubmit} noValidate>
+            <div className="mb-4">
+                <input
+                    type="text"
+                    name="companyName"
+                    className={`form-control ${formSubmitted && companyNameValid ? 'is-invalid' : ''}`}
+                    placeholder="Nombre de la compañía"
+                    value={companyName}
+                    onChange={onInputChange}
+                />
+                <div className='invalid-feedback'>{companyNameValid}</div>
             </div>
-            <PeopleList />
-        </>
+            <div className="mb-4">
+                <input
+                    type="text"
+                    name="contactName"
+                    className={`form-control ${formSubmitted && contactNameValid ? 'is-invalid' : ""}`}
+                    placeholder="Nombre de la persona de contacto"
+                    value={contactName}
+                    onChange={onInputChange} />
+                <div className='invalid-feedback'>{contactNameValid}</div>
+            </div>
+            <div className="mb-4">
+                <input
+                    type="email"
+                    name="email"
+                    className={`form-control ${formSubmitted && emailValid ? 'is-invalid' : ""}`}
+                    placeholder="Correo electrónico"
+                    value={email}
+                    onChange={onInputChange} />
+                <div className='invalid-feedback'>{emailValid}</div>
+            </div>
+            <div className="mb-4">
+                <input
+                    type="tel"
+                    name="phone"
+                    className={`form-control ${formSubmitted && phoneValid ? 'is-invalid' : ""}`}
+                    placeholder="Teléfono"
+                    value={phone}
+                    onChange={onInputChange} />
+                <div className='invalid-feedback'>{phoneValid}</div>
+            </div>
+            <div className="d-grid gap-2 col-12 mx-auto">
+                <button
+                    type="submit"
+                    className={`btn btn-primary px-5 ${formSubmitted && !isFormValid ? 'disabled' : ''}`}
+                >Guardar</button>
+            </div>
+        </form>
     )
 }

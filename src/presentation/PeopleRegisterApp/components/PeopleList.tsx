@@ -1,21 +1,31 @@
-import { useFetchRegisteredPeople } from "../hooks/useFetchRegisteredPeople"
+import { Person } from "../../../domain/models/Person";
+import { PersonItem } from "./PersonItem";
 
-export const PeopleList = () => {
+type PeopleListProps = {
+    data?: Person[];
+}
 
-    const {
-        people
-    } = useFetchRegisteredPeople();
-
+export const PeopleList = ({ data = [] }: PeopleListProps) => {
 
     return (
-        <ul>
-            {
-                people?.map(({ Name, Email }) => (
-                    <li key={Email}>
-                        <p>{Name}</p>
-                    </li>
-                ))
-            }
-        </ul>
+        <div className="mh-100">
+            <div className="table-responsive">
+                <table className="table">
+                    <thead>
+                        <tr>
+                            <th>Compañia</th>
+                            <th>Contacto</th>
+                            <th>Correo</th>
+                            <th>Teléfono</th>
+                        </tr>
+                    </thead>
+                    <tbody className="table-group-divider">
+                        {
+                            data?.map((person) => (<PersonItem key={person.Email} person={person} />))
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
     )
 }
