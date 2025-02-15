@@ -103,15 +103,6 @@ export const RegisterPersonForm = () => {
 
     return (
         <>
-            <MessageModal
-                show={messageModal.show}
-                handleClose={handleCloseMessageModal}
-                title={messageModal.title}>
-                <p>
-                    La información se guardó correctamente en la Base de datos, para ver todos los registros haga click en el botón aceptar.
-                </p>
-            </MessageModal>
-
             <form className="form" onSubmit={handleFormSubmit} noValidate>
                 <div className="mb-4">
                     <input
@@ -161,6 +152,14 @@ export const RegisterPersonForm = () => {
                     >Guardar</button>
                 </div>
             </form>
+            <MessageModal
+                show={messageModal.show}
+                handleClose={handleCloseMessageModal}
+                title={messageModal.title}>
+                <p>
+                    La información se guardó correctamente en la Base de datos, para ver todos los registros haga click en el botón aceptar.
+                </p>
+            </MessageModal>
         </>
 
     )
