@@ -1,50 +1,55 @@
-# React + TypeScript + Vite
+# People Register React App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a React application for registering and managing people.
 
-Currently, two official plugins are available:
+## Application's specification
+- **Vite** To develop the app in the faster way.
+- **React** Reactive JS library to create the UI.
+- **Typescript** To include typing in the development.
+- **Bootstrap** To Style the app and implement responsive view.
+- **HTML** To Add components.
+- **CSS** To Style components.
+- **Axios** To use as http client and send requests.
+- **Nodejs JS** Engine to run and serve the application.
+- **Clean Architecture** To use as architecture and create a robust and reliable application based on the domain.
+- **Inversify** To inject dependencies.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Project Structure
+- **src**: Contains the source code of the application.
+- **assets**/: Contains static assets like images.
+- **domain**/: Contains domain models and use cases.
+- **infrastructure**/: Contains infrastructure-related code like configurations, DTOs, repositories, and services.
+- **presentation**/: Contains the presentation layer of the application, including components, hooks, and pages.
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Prerequisites
+- Node.js
+- npm
 
-- Configure the top-level `parserOptions` property like this:
+### Installation
+1. Clone the repository:
+    ```sh
+    git clone https://github.com/gopichardo/people-register-react-app.git
+    ```
+2. Navigate to the project directory:
+    ```sh
+    cd people-register-react-app
+    ```
+3. Install the dependencies:
+    ```sh
+    npm install
+    ```
+### Environment Variables
+Create a `.env` file in the root directory and add the following environment variables:
+```sh
+VITE_REGISTER_PERSON_API_URL=<Backend_Api_Url>
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
 ```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+### Running the Application
+To start the development server, run:
+```sh
+npm run dev
 ```
+### License
+This project is licensed under the MIT License.
