@@ -3,11 +3,12 @@ import { useState } from 'react';
 import { useForm } from '../hooks/useForm';
 import { RegisterForm } from '../types/register-form';
 import { MessageModal } from './MessageModal';
+import { useRegisterPeople } from '../hooks/useRegisterPeople';
+import { useNavigate } from 'react-router-dom';
 
 
 const defaultMessageModalSettings = {
     show: false,
-    content: "",
     title: "",
     button: {
         text: "",
@@ -18,6 +19,13 @@ export const RegisterPersonForm = () => {
     const [formSubmitted, setFormSubmitted] = useState(false);
 
     const [messageModal, setMessageModal] = useState(defaultMessageModalSettings);
+
+    const { setNewPerson, registeredPerson } = useRegisterPeople();
+
+    const navigate = useNavigate();
+
+    console.log("registeredPerson: ", registeredPerson);
+
 
     const initialForm: RegisterForm = {
         companyName: '',
@@ -55,18 +63,31 @@ export const RegisterPersonForm = () => {
         phone,
         phoneValid,
         onInputChange,
-        isFormValid
+        isFormValid,
+        onResetForm
     } = useForm(initialForm, formValidations);
 
     const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setFormSubmitted(true);
+
         if (!isFormValid) return;
+
+        setNewPerson({
+            name: contactName as string,
+            company: {
+                name: companyName as string
+            },
+            email: email as string,
+            phone: phone as string,
+        });
+
+        onResetForm();
+        setFormSubmitted(false);
 
         setMessageModal({
             title: "Datos guardados correctamente",
             show: true,
-            content: JSON.stringify({ companyName, contactName }),
             button: {
                 text: "Aceptar",
                 style: "primary"
@@ -76,15 +97,20 @@ export const RegisterPersonForm = () => {
 
     const handleCloseMessageModal = () => {
         setMessageModal(defaultMessageModalSettings);
+        navigate("/registros");
     }
+
 
     return (
         <>
             <MessageModal
                 show={messageModal.show}
                 handleClose={handleCloseMessageModal}
-                content={messageModal.content}
-                title={messageModal.title} />
+                title={messageModal.title}>
+                <p>
+                    La información se guardó correctamente en la Base de datos, para ver todos los registros haga click en el botón aceptar.
+                </p>
+            </MessageModal>
 
             <form className="form" onSubmit={handleFormSubmit} noValidate>
                 <div className="mb-4">

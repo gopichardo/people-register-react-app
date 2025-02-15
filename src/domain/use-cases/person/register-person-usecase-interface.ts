@@ -2,5 +2,5 @@ import { RegisterPersonInputDto } from "../../../infrastructure/dtos/person/regi
 import { Person } from "../../models/Person";
 
 export interface IRegisterPersonUseCase {
-  register(person: RegisterPersonInputDto): Promise<Person[]>;
+  register(person: RegisterPersonInputDto): Promise<Person>;
 }

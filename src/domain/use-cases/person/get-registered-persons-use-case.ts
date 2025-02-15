@@ -15,13 +15,14 @@ export class GetRegisteredPersonsUseCase
 
   async getList(): Promise<Person[]> {
     try {
-      const { data } = await this.IPersonApiRepository.getRegisteredPeople();
+      const people = await this.IPersonApiRepository.getRegisteredPeople();
 
-      const response: Person[] = data.map((personDto) => {
+      const response: Person[] = people.map((personDto) => {
         const person: Person = {
-          Name: personDto?.contactName,
-          Phone: personDto?.phone,
-          Email: personDto?.email,
+          Id: personDto.id,
+          Name: personDto.name,
+          Phone: personDto.phone,
+          Email: personDto.email,
           Company: {
             Name: personDto?.company?.name,
           },

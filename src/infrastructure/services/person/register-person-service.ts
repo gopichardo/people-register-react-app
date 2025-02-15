@@ -12,7 +12,7 @@ export class RegisterPersonService implements IRegisterPersonService {
     private readonly registerPersonUseCase: IRegisterPersonUseCase
   ) {}
 
-  register(person: RegisterPersonInputDto): Promise<Person[]> {
+  register(person: RegisterPersonInputDto): Promise<Person> {
     return this.registerPersonUseCase.register(person);
   }
 }

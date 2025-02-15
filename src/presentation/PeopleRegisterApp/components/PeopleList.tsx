@@ -21,7 +21,7 @@ export const PeopleList = ({ data = [] }: PeopleListProps) => {
                     </thead>
                     <tbody className="table-group-divider">
                         {
-                            data?.map((person) => (<PersonItem key={person.Email} person={person} />))
+                            data?.map((person) => (<PersonItem key={person.Id} person={person} />))
                         }
                     </tbody>
                 </table>

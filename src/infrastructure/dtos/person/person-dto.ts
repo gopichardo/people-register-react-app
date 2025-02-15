@@ -1,7 +1,8 @@
 import { CompanyDto } from "./company-dto";
 
 export type PersonDto = {
-  contactName: string;
+  id?: string;
+  name: string;
   company: CompanyDto;
   phone: string;
   email: string;

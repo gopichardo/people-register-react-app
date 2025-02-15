@@ -11,27 +11,24 @@ export class RegisterPersonUseCase implements IRegisterPersonUseCase {
     @inject(TYPES.IPersonApiRepository)
     private readonly personApiRepository: IPersonApiRepository
   ) {}
-  async register(person: RegisterPersonInputDto): Promise<Person[]> {
+  async register(person: RegisterPersonInputDto): Promise<Person> {
     try {
-      const { data } = await this.personApiRepository.registerPerson(person);
+      const responseDto = await this.personApiRepository.registerPerson(person);
 
-      const response: Person[] = data.map((personDto) => {
-        const person: Person = {
-          Name: personDto?.contactName,
-          Phone: personDto?.phone,
-          Email: personDto?.email,
-          Company: {
-            Name: personDto?.company?.name,
-          },
-        };
+      const registeredPerson: Person = {
+        Id: responseDto.data?.id ?? "",
+        Name: responseDto.data?.name ?? "",
+        Phone: responseDto.data?.phone ?? "",
+        Email: responseDto.data?.email ?? "",
+        Company: {
+          Name: responseDto.data?.company?.name ?? "",
+        },
+      };
 
-        return person;
-      });
-
-      return response;
+      return registeredPerson;
     } catch (error) {
       console.error("Register person use case error :", error);
-      return [];
+      throw new Error("Error sregistering person");
     }
   }
 }
