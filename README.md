@@ -51,5 +51,8 @@ To start the development server, run:
 ```sh
 npm run dev
 ```
-### License
+## License
 This project is licensed under the MIT License.
+
+## Author
+Mail: [gopichardoces@gmail.com](gopichardoces@gmail.com) | Linkedin: [gopichardoces](https://www.linkedin.com/in/gopichardoces/) | GitHub: [gopichardo](https://github.com/gopichardo)
